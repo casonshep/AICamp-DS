@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title> Real or Fake? Detecting the legitimacy of electronically-submitted bank notes with Machine Learning.</title>
+        <link rel="icon" type="image/x-icon" href="{{url_for('static', filename='assets/favicon.ico')}}" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{{url_for('static', filename='css/styles.css')}}" rel="stylesheet" />
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+            <div class="container px-4">
+                <a class="navbar-brand" href="#page-top">Bank Note Verification</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#services">Exploration</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contact">Machine learning</a></li>
+                        <li class="nav-item"><a class = "nav-link" href="#Conclusion">Conclusion</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
+                        <li class="nav-item"><a class="nav-link" href="https://github.com/casonshep/AICamp-DS">Our Github</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Header-->
+        <header class="bg-primary bg-gradient text-white">
+            <div class="container px-4 text-center">
+                <h1 class="fw-bolder"> Real or Fake? <br> Detecting the legitimacy of electronically-submitted bank notes with Machine Learning</h1>
+                <p class="lead">A data science project by an AI Camp instuctor-in-training</p>
+                <a class="btn btn-lg btn-light" href="#about">See my work below</a>
+            </div>
+        </header>
+        <!-- About section-->
+        <section id="about">
+            <div class="container px-4">
+                <div class="row gx-4 justify-content-center">
+                    <div class="col-lg-8">
+                        <h2>What does the project do?
+                        </h2>
+                        <p class="lead"> I utilize a dataset of 1372 preprocessed bank note images, with each image's variance, skew, curt, and entropy recorded. Furthermore, each bank note was classified to be either real or fake. My goal was to use this dataset to predict the legitimacy of bank notes, given the required features are known.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Services section-->
+        <section class="bg-light" id="services">
+            <div class="container px-4">
+                <div class="row gx-4 justify-content-center">
+                    <div class="col-lg-8">
+                    <h1 id="top-level-heading">Exploration</h1><br/>
+                    </div>
+                    <div class="col-lg-8">
+                        <h3>Exploration of data: Correlation table</h3>
+                        <p class="lead">First, we created a correlation table to see how different features correlated with one another. Note that image curt and entropy seem to be the most positively correlated, while image skew and curt seem to be the most negatively correlated.</p>
+                    <img src="static/images/feature_correlation.jpg" alt="Correlation of features from our dataset. Note that image curt and entropy seem to be the most positively correlated, while image skew and curt seem to be the most negatively correlated." width="550" height="500">
+<br><br>
+                    </div>
+                    <div class="col-lg-8">
+                        <h3>Exploration of data: Scatterplots</h3>
+                        <p class="lead"> By looking at scatterplots, we can visually see trends in the data. Notice that the plot of image curt vs skew seems to be negatively correlated, while the plot of entropy vs skew seems to have a parabolic nature. We will examine these plots closer below.</p>
+                        <img src="static/images/scatter_grid.jpg" alt="Scatterplot grid which plots every feature of our dataset against one another." width="800" height="450"> <br><br>
+                    </div>
+                    <div class="col-lg-8">
+                        <h3>Scatterplots of identified correlated features</h3>
+                        <p class="lead">Through the exploration above, we have identified the features in the following scatterplots to be the most correlated. Thus, we decided to replot them with labels depicting their respective class. Note that class 0 represents a real bank note, while class 1 represents a falsified note. Here we can see that regardless of class, each plot follows the same trends identified earlier. Furthermore, real bank notes seem to have higher average skew value.
+                          </p>
+                        <img src="static/images/scatter_curt_skew.jpg" alt="Scatterplot of Curt versus Skew." width="399" height="370"><img src="static/images/scatter_entropy_skew.jpg" alt="Scatterplot of Entropy versus Skew." width="399" height="370">
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Contact section-->
+        <section id="contact">
+            <div class="container px-4">
+                <div class="row gx-4 justify-content-center">
+                    <div class="col-lg-8">
+                        <h1>Machine Learning</h1></br>
+                    </div>
+                    <div class="col-lg-8">
+                        <h2>Gradient Boosting: Explanation</h2>
+                        <p class="lead"> Gradient boosting is a machine learning method in which a decision tree is built to classify points in the data. In gradient boosting, we can use multiple decision trees when we fit the model to the data. As data is passed through the tree to generate a prediction, it is passed through each node until a leaf is reached, which represents its classofication. In this case, a 0 or 1 representing real or fake.</p>
+                        <img src="static/images/decision_tree.png" class="page-image" />
+                    </div>
+
+                    <div class="col-lg-8">
+                        <h2>Gradient Boosting: Results</h2>
+                        <p class="lead"> Here we have a confusion matrix with the results of gradient boosting applied on our testing dataset. A confusion matrix for a classification problem tells us the number of correct and incorrect predictions for every class. In this case, the model classified only one real bank note as a fake note. Gradient Boosting performed very well on this dataset.</p>
+                        <img width="500" height="500" title="Gradient Boosting Confusion Matrix" src="static/images/boost_confusion.jpg"></img>  
+                        <p class="lead">By calculating the total correct classifications over all examples classified, we get an average accuracy of around 99%. </p>
+                    </div>
+                    <div class="col-lg-8">
+                        <h2>Neural Networks: Explanation</h2>
+                        <p class="lead">Neural networks are one of the most powerful machine learning approaches for data with complicated patterns, but are very prone to overfitting to simple data. Thus, when training with neural networks, it is very important to set aside a partition of dataa to use to verify the accuracy of the model</p>
+                        <img src="{{url_for('static', filename='images/nn_explanation.png')}}" class="page-image" width="500"/>
+                    </div>
+
+                    <div class="col-lg-8">
+                        <h2>Neutral Networks: Results</h2>
+                        <p class="lead">Looking at the confusion matrix below, the neural network performed well.</p>
+                        <img width="500" height="500" title="Neural Network Confusion Matrix" src="static/images/MLP_confusion.jpg"></img>
+                        <p class="lead">
+                          In training any neural network, we have the option of using an "early stopping" token which still stop iterating on the dataset when the accuracy increase becomes minimal. Since our dataset was only several hundred entries, we decided not to implement early stopping. Early stopping is useful when we have very large datasets, or expect fitting the data to be very difficult. In total, the NN performed at 100% accuracy in classification. </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="bg-light" id="Conclusion">
+            <div class="container px-4">
+                <div class="row gx-4 justify-content-center">
+                    <div class="col-lg-8">
+                    <h1 id="top-level-heading">Conclusion</h1><br/>
+                    </div>
+                    <div class="col-lg-8">
+
+                        <p class="lead">In conclusion, the neural networks marginally performed better than gradient boosting on our dataset for detecting real and fake bank notes. Because the data had only a few features, each one of them was vital to achieving the accuracy the models did. </p>
+
+                        <h3>So what?</h3>
+                            
+                        <p class="lead">So what is the significance of our project? Now that we have a model that can accurately detect a real or falsified bank note, banks can implement this model into their business. For example, when a user uploads a bank note image our model may classify as fake, they can prompt the user to upload another photo or perform another method of verification. </p>
+                       <h3>Possible Extensions</h3>
+                            
+                        <p class="lead">How can we improve our model? Our model achieved 100% accuracy, meaning utilizing other means of learning may not be beneficial to us. Rather, having a larger dataset would be a great way to ensure that our model is robust and applicable to some 'general' bank note instance. Furthermore, what if we don't have more data available? We could use an ensemble method to combine BOTH of the models we have trained. This may help us increase generality. To extend this project moving foward, I would suggest that students create a spot for users to upload a photo of a bank note, to which our site will return whether the model thinks its a real or fake note. To do this, we would first have to add a spot for users to upload images, and then extract all the necessary features from the image before leting the model make a prediction based on the data.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section style="margin-left: 80px; margin-right: 80px;" id="team">
+        <header class="bg-primary text-center py-5 mb-4">
+            <div class="container px-4">
+              <h1 class="fw-light text-white">Meet the Extraordinary AI Camp Team</h1>
+            </div>
+          </header>
+          
+          <!-- Page Content -->
+          <div class="container px-4">
+            <div class="row">
+              <!-- Team Member 1 -->
+              <div class="col-xl-2 col-md-6 mb-4">
+                <div class="card border-0 shadow">
+                  <img src="static/images/casonPFP.jpg" height="250" class="card-img-top" alt="...">
+                  <div class="card-body text-center">
+                    <h5 class="card-title mb-0">Cason Shepard</h5>
+                    <div class="card-text text-black-50">AI Camp Instructor-In-Training</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.row -->
+          
+          </div>
+        </section>
+        <!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container px-4"><p class="m-0 text-center text-white">Copyright &copy; AI Camp 2022</p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="/static/js/scripts.js"></script>
+    </body>
+</html>
+2>
